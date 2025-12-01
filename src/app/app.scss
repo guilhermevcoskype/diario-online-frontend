@@ -1,0 +1,40 @@
+.app-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f0f0f0;
+}
+
+.app-header,
+.app-footer {
+  flex-shrink: 0;
+  padding: 10px 20px;
+  background-color: hsl(47, 100%, 50%);
+  color: #000;
+}
+
+.app-footer {
+  text-align: center;
+}
+
+/* Navegação */
+.app-nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.app-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.app-nav a:hover {
+  color: #555;
+}
+
+.app-nav a.active {
+  border-bottom: 2px solid black;
+}
