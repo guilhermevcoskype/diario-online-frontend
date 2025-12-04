@@ -1,0 +1,61 @@
+<div class="register-container">
+  <form [formGroup]="form" (ngSubmit)="register()" class="register-form">
+    <h1>Registrar</h1>
+
+    <!-- Nome -->
+    <div class="field">
+      <label for="name">Nome</label>
+      <input id="name" type="text" formControlName="name" placeholder="Seu nome aqui">
+
+      @if(name?.touched && name?.hasError('required')){
+        <small class="error">
+          O nome é obrigatório.
+        </small>
+      }
+      
+      @if(name?.touched && name?.hasError('minlength')){
+       <small class="error">
+         O nome deve ter pelo menos 3 caracteres.
+      </small>
+    }
+    </div>
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="Seu email aqui">
+
+      @if (email?.touched && email?.hasError('required')) {
+      <small class="error">
+        O email é obrigatório.
+      </small>
+      }
+      @if (email?.touched && email?.hasError('email')) {
+      <small class="error">
+        Informe um email válido.
+      </small>
+      }
+    </div>
+
+    <!-- Senha -->
+    <div class="field">
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password" placeholder="Sua senha aqui">
+
+      @if (password?.touched && password?.hasError('required')) {
+      <small class="error">
+        A senha é obrigatória.
+      </small>
+      }
+      @if (password?.touched && password?.hasError('minlength')) {
+      <small class="error">
+        A senha deve ter pelo menos 6 caracteres.
+      </small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Entrar</button>
+    <button type="button" class="home-btn" (click)="goToHome()">Home</button>
+  </form>
+
+</div>

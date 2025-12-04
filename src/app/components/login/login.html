@@ -1,0 +1,43 @@
+<div class="login-container">
+  <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
+    <h1>Login</h1>
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="Seu email aqui">
+
+      @if (email?.touched && email?.hasError('required')) {
+      <small class="error">
+        O email é obrigatório.
+      </small>
+      }
+      @if (email?.touched && email?.hasError('email')) {
+      <small class="error">
+        Informe um email válido.
+      </small>
+      }
+    </div>
+
+    <!-- Senha -->
+    <div class="field">
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password" placeholder="Sua senha aqui">
+
+      @if (password?.touched && password?.hasError('required')) {
+      <small class="error">
+        A senha é obrigatória.
+      </small>
+      }
+      @if (password?.touched && password?.hasError('minlength')) {
+      <small class="error">
+        A senha deve ter pelo menos 6 caracteres.
+      </small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Entrar</button>
+    <button type="button" class="register-btn" (click)="goToRegister()">Registrar</button>
+  </form>
+
+</div>
