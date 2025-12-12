@@ -1,0 +1,39 @@
+<div class="mediaPage">
+    <h1>
+        {{media()?.name}}
+    </h1>
+    <div class="cover">
+        <img src={{media()?.cover}} alt={{media()?.name}}>
+    </div>
+    <div class="rating">
+        <p><b>Avaliação: </b>
+        @if(media()?.rating){
+            {{media()?.rating}}
+        }@else {
+            Não há avaliação
+        }
+        </p>
+    </div>
+    <div class="summary">
+        <p><b>Descrição:</b>
+        @if(media()?.summary){
+            {{(media()?.summary)}}
+        }@else {
+            Não há descrição
+        }
+        </p>
+    </div>
+    <div class="comments">
+        <p><b>Comentário: </b>
+        @if(media()?.comments){
+            {{media()?.comments}}
+        }@else {
+            <textarea name="comments" [value]="comments()"
+            (input)="inputComments($event)"></textarea>
+        }
+        </p>
+    </div>
+    <button type="submit" (click)="saveGameDiary()" >
+        Salvar jogo
+    </button>
+</div>

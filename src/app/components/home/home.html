@@ -1,0 +1,42 @@
+@if (!logado) {
+  
+<h1>Bem vindo!</h1>
+
+<p>Este é o diário online onde você pode registrar seus filmes, séries e jogos, avaliar e comentar a respeito.</p>
+
+<p>Use o menu acima para navegar entre as páginas de Login e Registro.</p>
+<p>Após fazer login, você poderá acessar sua área pessoal e começar a registrar suas atividades.</p>
+<p>Divirta-se!</p>
+
+} @else {
+
+<h1>Olá, {{ user?.name }}!</h1>
+<p>Bem vindo de volta ao seu diário online. Aqui estão suas atividades recentes:</p>
+
+<div class="inputSearchMedia">
+  <input type="text" class="search-input" placeholder="Pesquisar mídia..." [value]="searchQuery()"
+    (input)="inputMediaChanged($event.target.value)" />
+  <button class="clear-button" (click)="handleClear()">Limpar</button>
+</div>
+
+<app-search-media [inputMediaList]="mediaList()">
+</app-search-media>
+
+@if(user?.media) {
+
+  <!-- <h2>Seus games</h2>
+<app-search-media [inputMediaList]="mediaList()">
+</app-search-media> -->
+
+<h2>Seus filmes:</h2>
+<!-- <app-lista-filmes /> -->
+
+<h2>Suas séries:</h2>
+<!-- <app-lista-series /> -->
+
+<h2>Seus jogos:</h2>
+<!-- <app-lista-jogos /> -->
+}
+
+
+}

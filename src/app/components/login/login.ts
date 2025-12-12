@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +13,9 @@ import { Router } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-
-  constructor(private router: Router) {}
+  errorMessage: string = '';
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
   form = new FormGroup({
     email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
@@ -21,16 +25,27 @@ export class Login {
   get email() { return this.form.get('email'); }
   get password() { return this.form.get('password'); }
 
-  login() {
+  user = signal<User | null>(null);
+
+  async login() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    console.log("Login:", this.form.getRawValue());
+    const email = this.email?.value!;
+    const senha = this.password?.value!;
+
+    const success = await this.auth.login(email, senha);
+
+    if (success) {
+      this.router.navigate(['/home']);
+    } else {
+      this.errorMessage = 'Email ou senha inválidos';
+    }
   }
 
   goToRegister() {
-  this.router.navigate(['/registrar']);
-}
+    this.router.navigate(['/registrar']);
+  }
 }

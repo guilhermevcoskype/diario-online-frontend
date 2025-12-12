@@ -1,0 +1,14 @@
+<div class="app-user-list-media">
+
+
+    <div class="media">
+        @for (media of inputUserMediaList(); track media.gameId) {
+            <div class="media-item" (click)="goMediaPage(media)">
+                <img class="cover" src="{{ media.cover }}" alt="{{ media.name }} cover" />
+                <h3 [title]="media.name">{{ media.name }}</h3>
+            </div>
+        }@empty {
+            <p>Sem jogos para mostrar</p>
+        }
+    </div>
+</div>

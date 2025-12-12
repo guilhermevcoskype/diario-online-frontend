@@ -1,0 +1,13 @@
+<div class="title"><h2>Pesquisa</h2></div>
+<div class="app-search">
+    <div class="media">
+        @for (media of inputMediaList(); track media.gameId) {
+            <div class="media-item" (click)="goMediaPage(media)">
+                <img class="cover" src="{{ media.cover }}" alt="{{ media.name }} cover" />
+                <h3 [title]="media.name">{{ media.name }}</h3>
+            </div>
+        }@empty {
+            <p>Sem jogos para mostrar</p>
+        }
+    </div>
+</div>

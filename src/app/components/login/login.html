@@ -38,6 +38,10 @@
 
     <button type="submit" [disabled]="form.invalid">Entrar</button>
     <button type="button" class="register-btn" (click)="goToRegister()">Registrar</button>
+
+    @if (errorMessage) {
+    <small class="error errorMessage">{{ errorMessage }}</small>
+    }
   </form>
 
 </div>
