@@ -1,11 +1,12 @@
+import { SavedMediaUser } from './../models/saved-media-user.model';
 import { Game } from './../models/game.model';
 import { RegisterRequest } from '../models/register-request';
 import { Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { User } from '../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthResponse } from '../models/auth-response';
-import { UserMediaRequestUpdate } from '../models/userMediaRequestUpdate.model';
+import { UserMediaRequestUpdate } from '../models/user-media-request-update.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,9 +27,9 @@ export class AuthService {
       );
 
       localStorage.setItem('token', res.accessToken);
-
-      console.log('Usuário logado:', res.userResponse);
-      this.user.set(res.userResponse);
+      console.log('Token: ', res.accessToken);
+      console.log('Usuário logado: ', res.userResponseDTO);
+      this.user.set(res.userResponseDTO);
       return true;
 
     } catch (e) {
@@ -48,13 +49,32 @@ export class AuthService {
     }
   }
 
-  async updateUserMidia(userMediaRequestUpdate: UserMediaRequestUpdate) {
-    console.log("Game que vai ser salvo: ", userMediaRequestUpdate)
+  async updateUserMidia(userMediaRequestUpdate: UserMediaRequestUpdate): Promise<boolean> {
+    console.log('Game que vai ser salvo: ', userMediaRequestUpdate);
+
     try {
-      await this.http.put(this.apiUrl + 'user', userMediaRequestUpdate);
+      const user = await firstValueFrom(
+        this.http.put<User>(this.apiUrl + 'user', userMediaRequestUpdate)
+      );
+      this.user.set(user);
       return true;
     } catch (e) {
-      console.error('Erro ao salvar usuario: ', e)
+      console.error('Erro ao salvar usuario: ', e);
+      return false;
+    }
+  }
+  
+  async saveUserMidia(savedMediaUser: SavedMediaUser): Promise<boolean> {
+    console.log('Game que vai ser salvo: ', savedMediaUser);
+
+    try {
+      const user = await firstValueFrom(
+        this.http.post<User>(this.apiUrl + 'user/saveMediaOnUser', savedMediaUser)
+      );
+      this.user.set(user);
+      return true;
+    } catch (e) {
+      console.error('Erro ao salvar usuario: ', e);
       return false;
     }
   }
@@ -73,12 +93,14 @@ export class AuthService {
   }
 
   searchGame(name: string) {
-    return this.http.post<Game[]>(this.apiUrl + 'gamelist/games', name);
+    const params = new HttpParams().set('gameName', name).set('email', this.user()?.email || '');
+    return this.http.post<Game[]>(this.apiUrl + 'gamelist/games', params);
   }
 
   async refreshGamesUserList(user: User) {
     try {
-      await this.http.post(this.apiUrl + 'user/userMedia', user.email);
+      const refreshedUser = await firstValueFrom(this.http.post<User>(this.apiUrl + 'user/mediaFromUser', user.email));
+      this.user.set(refreshedUser);
       return true;
     } catch (e) {
       console.error('Erro ao salvar usuario: ', e)

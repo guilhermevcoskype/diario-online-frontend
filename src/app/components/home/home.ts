@@ -14,6 +14,8 @@ export class Home {
   private auth = inject(AuthService);
   public mediaList = signal<Array<Game>>([]);
   public searchQuery = signal<string>('');
+  private searchTimeout: ReturnType<typeof setTimeout> | null = null;
+  public isLoading = signal<boolean>(false);
 
 
 
@@ -44,11 +46,27 @@ export class Home {
 
   inputMediaChanged(value: string) {
     this.searchQuery.set(value);
-    if (value.trim() !== '' && value.length >= 3) {
-      this.auth.searchGame(value).subscribe(response => {
-        this.mediaList.set(response);
-      });
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
     }
+    this.searchTimeout = setTimeout(() => {
+      if (value.trim() !== '' && value.length >= 3) {
+        this.isLoading.set(true);
+        this.auth.searchGame(value).subscribe({
+          next: (response) => {
+            this.isLoading.set(false);
+            this.mediaList.set(response);
+          },
+          error: () => {
+            this.isLoading.set(false);
+            this.mediaList.set([]);
+          }
+        });
+      }else {
+        this.mediaList.set([]);
+        this.isLoading.set(false);
+      }
+    }, 2000);
   }
 
   ngOnInit(): void {

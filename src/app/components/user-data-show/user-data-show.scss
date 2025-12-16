@@ -1,9 +1,12 @@
-.app-user-list-media {
+.app-user-data-show {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
 }
-.media {
+.games-list {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -36,7 +39,11 @@ h3{
     font-size: medium;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; //acaba com 3 pontos caso passe do limite
+    text-overflow: ellipsis;
     display: block;
     max-width: 250px;
+}
+
+h2{
+    text-align: center;
 }

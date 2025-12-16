@@ -1,4 +1,5 @@
-export interface MediaBase {    
+export interface MediaBase { 
+    id: string;
     name: string;
     summary: string;
     cover: string;

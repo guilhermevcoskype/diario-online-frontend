@@ -7,33 +7,52 @@
     </div>
     <div class="rating">
         <p><b>Avaliação: </b>
-        @if(media()?.rating){
-            {{media()?.rating}}
-        }@else {
-            Não há avaliação
+            @if (!editRating() && rating() != undefined) {
+        <div class="stars readonly">
+            @for (star of Array(rating()); track $index) {
+            <span class="star filled">★</span>
+            }
+            @for (star of emptyStars(); track $index) {
+            <span class="star">☆</span>
+            }
+        </div>
+        <button type="button" (click)="editRating.set(true)">
+            Editar
+        </button>
+        } @else {
+        <div class="stars editable">
+            @for (star of [1,2,3,4,5]; track star) {
+            <span class="star clickable" [class.filled]="star <= (rating() ?? 0)" (click)="setRating(star)">
+                ★
+            </span>
+            }
+        </div>
         }
         </p>
     </div>
     <div class="summary">
         <p><b>Descrição:</b>
-        @if(media()?.summary){
+            @if(media()?.summary){
             {{(media()?.summary)}}
-        }@else {
+            }@else {
             Não há descrição
-        }
+            }
         </p>
     </div>
     <div class="comments">
-        <p><b>Comentário: </b>
-        @if(media()?.comments){
-            {{media()?.comments}}
-        }@else {
-            <textarea name="comments" [value]="comments()"
-            (input)="inputComments($event)"></textarea>
-        }
+        <p><b>Comentário:</b>
+            @if (!editComments() && media()?.comments) {
+            {{ comments() }}
+            <button type="button" (click)="editComments.set(true)">
+                Editar
+            </button>
+            } @else {
+            <textarea [value]="comments()" (input)="inputComments($event)">
+    </textarea>
+            }
         </p>
     </div>
-    <button type="submit" (click)="saveGameDiary()" >
+    <button type="submit" (click)="saveGameDiary()">
         Salvar jogo
     </button>
 </div>

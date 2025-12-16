@@ -1,20 +1,20 @@
-<!-- src/app/app.component.html -->
-
 <header class="app-header">
-   <nav class="app-nav">
+  <nav class="app-nav">
     <ul class="nav-left">
       <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
+      @if (user && user.media && user.media.length > 0) {
+      <li><a routerLink="/user-data-show" routerLinkActive="active">LISTA DE JOGOS</a></li>
+      }
     </ul>
     <ul class="nav-right">
-    @if (!user) {
-          <li><a routerLink="/login" routerLinkActive="active">LOGIN</a></li>
+      @if (!user) {
+      <li><a routerLink="/login" routerLinkActive="active">LOGIN</a></li>
       <li><a routerLink="/registrar" routerLinkActive="active">REGISTRAR</a></li>
-    }@else {
+      }@else {
       <li><a (click)="logout()">Sair</a></li>
-      
-    }
+
+      }
     </ul>
-    
   </nav>
 </header>
 

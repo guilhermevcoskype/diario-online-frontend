@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserListMedia } from './user-list-media';
+import { UserDataShow } from './user-data-show';
 
-describe('UserListMedia', () => {
-  let component: UserListMedia;
-  let fixture: ComponentFixture<UserListMedia>;
+describe('UserDataShow', () => {
+  let component: UserDataShow;
+  let fixture: ComponentFixture<UserDataShow>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserListMedia]
+      imports: [UserDataShow]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UserListMedia);
+    fixture = TestBed.createComponent(UserDataShow);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

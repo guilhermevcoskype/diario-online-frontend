@@ -4,9 +4,34 @@
     flex-direction: column;
     text-align: center;
     padding: 100px;
-    
+
 }
 
 textarea {
     width: 100%;
+}
+
+.stars.readonly .star {
+    font-size: 24px; /* Tamanho da estrela */
+    color: gray;     /* Cor padrão das vazias */
+}
+
+.stars.readonly .star.filled {
+    color: gold;   /* Cor das estrelas cheias */
+}
+/* Exemplo de CSS para o modo editable */
+.stars.editable .star {
+    font-size: 24px;
+    color: gray; /* Todas são cinzas por padrão */
+    cursor: pointer; /* Muda o cursor para uma mãozinha */
+    transition: color 0.2s; /* Adiciona uma transição suave */
+}
+
+.stars.editable .star.filled {
+    color: gold; /* As que satisfazem a condição ficam douradas */
+}
+
+/* Efeito de hover (opcional, mas comum) */
+.stars.editable .star:hover {
+    color: darkgoldenrod;
 }
