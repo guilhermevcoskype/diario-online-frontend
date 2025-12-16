@@ -3,7 +3,7 @@
         {{media()?.name}}
     </h1>
     <div class="cover">
-        <img src={{media()?.cover}} alt={{media()?.name}}>
+        <img [src]="media()?.cover == 'N/A' ? 'images/default-cover.jpg' : media()?.cover" alt="{{media()?.name}}">
     </div>
     <div class="rating">
         <p><b>Avaliação: </b>
