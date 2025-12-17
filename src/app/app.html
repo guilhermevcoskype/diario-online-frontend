@@ -1,22 +1,24 @@
-<!-- src/app/app.component.html -->
-
 <header class="app-header">
-  <!-- Removido o UL/LI extra e agrupado tudo em uma NAV -->
   <nav class="app-nav">
-    <ul>
-      <li>
-        <!-- Use routerLink, não href, para navegação interna do Angular -->
-        <a routerLink="/home" routerLinkActive="active" aria-label="Navegar para Home">HOME</a>
-      </li>
-      <li>
-        <a routerLink="/registrar" routerLinkActive="active" aria-label="Navegar para Registrar">REGISTRAR</a>
-      </li>
+    <ul class="nav-left">
+      <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
+      @if (user && user.media && user.media.length > 0) {
+      <li><a routerLink="/user-data-show" routerLinkActive="active">LISTA DE JOGOS</a></li>
+      }
+    </ul>
+    <ul class="nav-right">
+      @if (!user) {
+      <li><a routerLink="/login" routerLinkActive="active">LOGIN</a></li>
+      <li><a routerLink="/registrar" routerLinkActive="active">REGISTRAR</a></li>
+      }@else {
+      <li><a (click)="logout()">Sair</a></li>
+
+      }
     </ul>
   </nav>
 </header>
 
 <main class="app-main">
-  <!-- O router-outlet fica aqui para o conteúdo ser renderizado -->
   <router-outlet />
 </main>
 

@@ -18,3 +18,43 @@ app-root {
   height: 100%;
   width: 100%;
 }
+
+/* Placeholder styling (texto que aparece dentro do input) */
+input::placeholder {
+  color: #9aa4af;
+  opacity: 1;               /* opacidade padrão (alguns browsers têm opacidade menor por padrão) */
+  transition: opacity 0.18s ease;
+}
+
+/* Quando o input está em foco (usuário clicou nele) */
+input:focus {
+  border-color: #4f46e5;    /* muda a borda para indicar foco */
+  box-shadow: 0 4px 14px rgba(79,70,229,0.08);
+}
+
+/* Esconder placeholder ao focar (se a UX desejar) */
+input:focus::placeholder {
+  opacity: 0;               /* torna o placeholder invisível no foco */
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid #e63946;
+}
+
+/* Estilizar campos inválidos APÓS o usuário ter interagido (ng-invalid + ng-touched) */
+input.ng-invalid.ng-touched {
+  border-color: #e02424;    /* borda vermelha para erro */
+  box-shadow: 0 2px 8px rgba(224,36,36,0.06);
+}
+
+/* Mensagens de erro */
+.error {
+  color: #e02424;
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+/* Responsividade simples */
+@media (max-width: 480px) {
+  .login-form { padding: 18px; max-width: 100%; }
+  input { font-size: 0.95rem; }
+}

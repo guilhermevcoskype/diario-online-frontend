@@ -1,8 +1,8 @@
 .app-main {
   flex: 1;
-  padding: 20px;
   overflow-y: auto;
   background-color: #f0f0f0;
+  justify-content: center;
 }
 
 .app-header,
@@ -37,4 +37,17 @@
 
 .app-nav a.active {
   border-bottom: 2px solid black;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 20px;
+  list-style: none;
 }
