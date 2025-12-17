@@ -1,47 +1,50 @@
 <div class="login-container">
-  <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
-    <h1>Login</h1>
+  <div class="login-card">
+    <header class="login-header">
+      <div class="logo-circle">🔑</div>
+      <h1>Bem-vindo de volta</h1>
+      <p>Acesse sua conta para gerenciar seu diário</p>
+    </header>
 
-    <!-- Email -->
-    <div class="field">
-      <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" placeholder="Seu email aqui">
+    <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email</label>
+        <div class="input-wrapper">
+          <input id="email" type="email" formControlName="email" placeholder="nome@exemplo.com">
+        </div>
 
-      @if (email?.touched && email?.hasError('required')) {
-      <small class="error">
-        O email é obrigatório.
-      </small>
+        @if (email?.touched && email?.hasError('required')) {
+          <small class="error">O email é obrigatório.</small>
+        }
+        @if (email?.touched && email?.hasError('email')) {
+          <small class="error">Informe um email válido.</small>
+        }
+      </div>
+
+      <!-- Senha -->
+      <div class="field">
+        <label for="password">Senha</label>
+        <div class="input-wrapper">
+          <input id="password" type="password" formControlName="password" placeholder="Sua senha">
+        </div>
+
+        @if (password?.touched && password?.hasError('required')) {
+          <small class="error">A senha é obrigatória.</small>
+        }
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary" [disabled]="form.invalid">Entrar</button>
+        <div class="divider">ou</div>
+        <button type="button" class="btn-secondary" (click)="goToRegister()">Criar nova conta</button>
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-alert">
+          {{ errorMessage }}
+        </div>
       }
-      @if (email?.touched && email?.hasError('email')) {
-      <small class="error">
-        Informe um email válido.
-      </small>
-      }
-    </div>
-
-    <!-- Senha -->
-    <div class="field">
-      <label for="password">Senha</label>
-      <input id="password" type="password" formControlName="password" placeholder="Sua senha aqui">
-
-      @if (password?.touched && password?.hasError('required')) {
-      <small class="error">
-        A senha é obrigatória.
-      </small>
-      }
-      @if (password?.touched && password?.hasError('minlength')) {
-      <small class="error">
-        A senha deve ter pelo menos 6 caracteres.
-      </small>
-      }
-    </div>
-
-    <button type="submit" [disabled]="form.invalid">Entrar</button>
-    <button type="button" class="register-btn" (click)="goToRegister()">Registrar</button>
-
-    @if (errorMessage) {
-    <small class="error errorMessage">{{ errorMessage }}</small>
-    }
-  </form>
-
+    </form>
+  </div>
 </div>

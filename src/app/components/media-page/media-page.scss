@@ -1,37 +1,145 @@
-.mediaPage {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 100px;
+.media-details-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  animation: fadeIn 0.5s ease-out;
+}
 
+.media-card-detail {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: row; // Desktop: Lado a lado
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+
+  @media (max-width: 768px) {
+    flex-direction: column; // Mobile: Empilhado
+  }
+}
+
+// Lado Esquerdo
+.media-aside {
+  flex: 0 0 350px;
+  background: #f8fafc;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-right: 1px solid #e2e8f0;
+
+  .cover-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+  }
+}
+
+// Lado Direito
+.media-content {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h1 {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+  }
+}
+
+// Estrelas e Avaliação
+.rating-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fffbeb;
+  border-radius: 12px;
+  width: fit-content;
+
+  .label { font-weight: 600; font-size: 0.9rem; color: #92400e; }
+}
+
+.stars-display {
+  .star {
+    font-size: 1.5rem;
+    color: #cbd5e1;
+    &.filled { color: #fbbf24; }
+  }
+  &.editable .star {
+    cursor: pointer;
+    &:hover { transform: scale(1.2); display: inline-block; }
+  }
+}
+
+// Grupos de Informação
+.info-group {
+  margin-bottom: 2rem;
+  h3 {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+  }
+  .description-text {
+    line-height: 1.7;
+    color: #475569;
+  }
 }
 
 textarea {
-    width: 100%;
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: inherit;
+  transition: var(--transition);
+  &:focus {
+    border-color: var(--primary);
+    outline: none;
+  }
 }
 
-.stars.readonly .star {
-    font-size: 24px; /* Tamanho da estrela */
-    color: gray;     /* Cor padrão das vazias */
+// Botões
+.btn-save {
+  background: var(--primary);
+  color: #000;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  &:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+  }
 }
 
-.stars.readonly .star.filled {
-    color: gold;   /* Cor das estrelas cheias */
-}
-/* Exemplo de CSS para o modo editable */
-.stars.editable .star {
-    font-size: 24px;
-    color: gray; /* Todas são cinzas por padrão */
-    cursor: pointer; /* Muda o cursor para uma mãozinha */
-    transition: color 0.2s; /* Adiciona uma transição suave */
-}
-
-.stars.editable .star.filled {
-    color: gold; /* As que satisfazem a condição ficam douradas */
-}
-
-/* Efeito de hover (opcional, mas comum) */
-.stars.editable .star:hover {
-    color: darkgoldenrod;
+.btn-edit-inline {
+  margin-left: 10px;
+  background: #f1f5f9;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #64748b;
+  &:hover { background: #e2e8f0; }
 }

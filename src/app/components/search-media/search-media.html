@@ -1,21 +1,27 @@
-<div class="app-search">
-    <div class="title">
-        <h2>Pesquisa</h2>
-    </div>
-
-    <div class="media">
-        @if (loading()) {
-        <div class="spinner">
+<div class="search-results-container">
+    @if (loading()) {
+        <div class="loading-wrapper">
+            <div class="spinner"></div>
+            <p>Buscando mídias...</p>
         </div>
-        } @else {
-        @for (media of inputMediaList(); track media.gameId) {
-        <div class="media-item" (click)="goMediaPage(media)">
-            <img [src]="media.cover == 'N/A' ? 'images/default-cover.jpg' : media.cover" alt="{{media.name}}"/>
-            <!-- <h3 [title]="media.name">{{ media.name }}</h3> -->
+    } @else {
+        <div class="games-grid">
+            @for (media of inputMediaList(); track media.gameId) {
+                <div class="game-card" (click)="goMediaPage(media)">
+                    <div class="card-image">
+                        <img [src]="!media.cover || media.cover === 'N/A' ? 'images/default-cover.jpg' : media.cover" 
+                             [alt]="media.name" 
+                             [title]="media.name"/>
+                    </div>
+                    <div class="card-info">
+                        <h3 [title]="media.name">{{ media.name }}</h3>
+                    </div>
+                </div>
+            } @empty {
+                <div class="empty-results">
+                    <p>Nenhum resultado encontrado para sua busca.</p>
+                </div>
+            }
         </div>
-        }@empty {
-        <p>Sem jogos para mostrar</p>
-        }
-        }
-    </div>
+    }
 </div>

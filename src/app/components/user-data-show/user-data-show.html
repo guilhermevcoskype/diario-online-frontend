@@ -1,14 +1,27 @@
-<div class="app-user-data-show">
+<div class="user-list-container">
+    <header class="list-header">
+        <h1>🎮 Minha Coleção</h1>
+        <p>Você tem <strong>{{ medias.length }}</strong> jogos registrados</p>
+    </header>
 
-    <h2>Minha Lista de Jogos</h2>
-    <div class="games-list">
+    <div class="games-grid">
         @for (media of medias; track media.gameId) {
-            <div class="media-item" (click)="goMediaPage(media)">
-                <img class="cover" src="{{ media.cover }}" alt="{{ media.name }} cover" />
-                <h3 [title]="media.name">{{ media.name }}</h3>
+            <div class="game-card" (click)="goMediaPage(media)">
+                <div class="card-image">
+                    <img [src]="!media.cover || media.cover === 'N/A' ? 'assets/images/default-cover.jpg' : media.cover" 
+                         [alt]="media.name" 
+                         [title]="media.name"/>
+                </div>
+                <div class="card-info">
+                    <h3 [title]="media.name">{{ media.name }}</h3>
+                </div>
             </div>
-        }@empty {
-            <p>Sem jogos para mostrar</p>
+        } @empty {
+            <div class="empty-state">
+                <p>Sua lista ainda está vazia. 
+                   <a routerLink="/home">Procure um jogo</a> para começar!
+                </p>
+            </div>
         }
     </div>
 </div>
