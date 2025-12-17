@@ -1,53 +1,97 @@
-.app-main {
-  flex: 1;
-  overflow-y: auto;
-  background-color: #f0f0f0;
-  justify-content: center;
-}
-
-.app-header,
-.app-footer {
+.app-header {
   flex-shrink: 0;
-  padding: 10px 20px;
-  background-color: hsl(47, 100%, 50%);
-  color: #000;
-}
-
-.app-footer {
-  text-align: center;
-}
-
-/* Navegação */
-.app-nav ul {
-  list-style-type: none;
+  padding: 0 2rem;
+  height: 70px;
+  background-color: #ffffff; /* Fundo branco para o header é mais atual */
   display: flex;
-  gap: 20px;
-}
-
-.app-nav a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-}
-
-.app-nav a:hover {
-  color: #555;
-}
-
-.app-nav a.active {
-  border-bottom: 2px solid black;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .app-nav {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #64748b;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: var(--transition);
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-main);
+      background-color: #f1f5f9;
+    }
+
+    &.active {
+      color: var(--primary-hover);
+      /* Efeito de linha embaixo mais moderno */
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -20px; /* Ajuste conforme a altura do header */
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary);
+        border-radius: 3px 3px 0 0;
+      }
+    }
+  }
 }
 
-.nav-left,
-.nav-right {
+/* Botão de Sair com estilo de botão real */
+.nav-right li a:not([routerLink]) {
+  background-color: #fee2e2;
+  color: #ef4444;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  &:hover {
+    background-color: #fecaca;
+  }
+}
+.app-footer {
+  flex-shrink: 0;
+  padding: 2rem;
+  background-color: #1e293b;
+  color: #f8fafc;
+  text-align: center;
+  font-size: 0.875rem;
+
+  p {
+    opacity: 0.8;
+  }
+}
+.app-main {
+  flex: 1;
   display: flex;
-  gap: 20px;
-  list-style: none;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  /* Animação suave na troca de páginas */
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

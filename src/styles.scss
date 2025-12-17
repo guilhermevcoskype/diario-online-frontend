@@ -1,60 +1,41 @@
-/* Reset global */
+:root {
+  --primary: #fbbf24;      /* Um amarelo âmbar mais elegante */
+  --primary-hover: #f59e0b;
+  --bg-main: #f8fafc;      /* Cinza azulado muito claro (moderno) */
+  --text-main: #1e293b;    /* Azul marinho escuro para texto */
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Documento */
 html, body {
   height: 100%;
-  width: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-main);
 }
 
-/* Root do Angular */
 app-root {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  min-height: 100vh; /* Garante que ocupe a tela toda */
 }
 
-/* Placeholder styling (texto que aparece dentro do input) */
-input::placeholder {
-  color: #9aa4af;
-  opacity: 1;               /* opacidade padrão (alguns browsers têm opacidade menor por padrão) */
-  transition: opacity 0.18s ease;
+/* Inputs Modernos */
+input {
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: var(--transition);
+  outline: none;
 }
 
-/* Quando o input está em foco (usuário clicou nele) */
 input:focus {
-  border-color: #4f46e5;    /* muda a borda para indicar foco */
-  box-shadow: 0 4px 14px rgba(79,70,229,0.08);
-}
-
-/* Esconder placeholder ao focar (se a UX desejar) */
-input:focus::placeholder {
-  opacity: 0;               /* torna o placeholder invisível no foco */
-}
-
-input.ng-invalid.ng-touched {
-  border: 2px solid #e63946;
-}
-
-/* Estilizar campos inválidos APÓS o usuário ter interagido (ng-invalid + ng-touched) */
-input.ng-invalid.ng-touched {
-  border-color: #e02424;    /* borda vermelha para erro */
-  box-shadow: 0 2px 8px rgba(224,36,36,0.06);
-}
-
-/* Mensagens de erro */
-.error {
-  color: #e02424;
-  font-size: 0.82rem;
-  margin-top: 2px;
-}
-/* Responsividade simples */
-@media (max-width: 480px) {
-  .login-form { padding: 18px; max-width: 100%; }
-  input { font-size: 0.95rem; }
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
 }

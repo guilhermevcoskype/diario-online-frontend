@@ -1,28 +1,45 @@
-@if (!logado) {
-  
-<h1>Bem vindo!</h1>
+<div class="home-container">
+  @if (!logado) {
+    <!-- Estado: Deslogado -->
+    <section class="hero-card">
+      <h1>Bem-vindo ao Diario Online</h1>
+      <p class="subtitle">Sua central personalizada para registrar filmes, séries e jogos.</p>
+      
+      <div class="features-grid">
+        <div class="feature-item">✍️ <span>Registre suas mídias</span></div>
+        <div class="feature-item">⭐ <span>Avalie e comente</span></div>
+        <div class="feature-item">📅 <span>Acompanhe seu progresso</span></div>
+      </div>
 
-<p>Este é o diário online onde você pode registrar seus filmes, séries e jogos, avaliar e comentar a respeito.</p>
+      <div class="cta-actions">
+        <p>Use o menu acima para começar sua jornada.</p>
+      </div>
+    </section>
 
-<p>Use o menu acima para navegar entre as páginas de Login e Registro.</p>
-<p>Após fazer login, você poderá acessar sua área pessoal e começar a registrar suas atividades.</p>
-<p>Divirta-se!</p>
+  } @else {
+    <!-- Estado: Logado -->
+    <header class="user-welcome">
+      <h1>Olá, <span>{{ user?.name }}</span>! 👋</h1>
+      <p>O que vamos registrar hoje? Procure pelo seu jogo abaixo:</p>
+    </header>
 
-} @else {
+    <div class="search-section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Ex: The Witcher 3, Elden Ring..." 
+          [value]="searchQuery()"
+          (input)="inputMediaChanged($event.target.value)" 
+        />
+        @if (searchQuery()) {
+          <button class="clear-button" (click)="handleClear()">Limpar</button>
+        }
+      </div>
+    </div>
 
-<h1>Olá, {{ user?.name }}!</h1>
-<p>Bem vindo de volta ao seu diário online. Procure pelo seu jogo:</p>
-
-<div class="inputSearchMedia">
-  <input type="text" class="search-input" placeholder="Pesquisar mídia..." [value]="searchQuery()"
-    (input)="inputMediaChanged($event.target.value)" />
-  <button class="clear-button" (click)="handleClear()">Limpar</button>
+    <app-search-media [inputMediaList]="mediaList()" [loading]="isLoading()">
+    </app-search-media>
+  }
 </div>
-
-<app-search-media [inputMediaList]="mediaList()" [loading]="isLoading()">
-</app-search-media>
-
-
-
-
-}

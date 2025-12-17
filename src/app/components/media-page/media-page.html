@@ -1,58 +1,69 @@
-<div class="mediaPage">
-    <h1>
-        {{media()?.name}}
-    </h1>
-    <div class="cover">
-        <img [src]="media()?.cover == 'N/A' ? 'images/default-cover.jpg' : media()?.cover" alt="{{media()?.name}}">
+<div class="media-details-container">
+  <div class="media-card-detail">
+    
+    <!-- Coluna da Esquerda: Imagem e Ação Principal -->
+    <div class="media-aside">
+      <div class="cover-wrapper">
+        <img [src]="!media()?.cover || media()?.cover === 'N/A' ? 'images/default-cover.jpg' : media()?.cover" 
+             [alt]="media()?.name">
+      </div>
+      <button class="btn-save" (click)="saveGameDiary()">
+        <span>💾</span> Salvar no Diário
+      </button>
     </div>
-    <div class="rating">
-        <p><b>Avaliação: </b>
-            @if (!editRating() && rating() != undefined) {
-        <div class="stars readonly">
-            @for (star of Array(rating()); track $index) {
-            <span class="star filled">★</span>
-            }
-            @for (star of emptyStars(); track $index) {
-            <span class="star">☆</span>
-            }
+
+    <!-- Coluna da Direita: Informações e Edição -->
+    <div class="media-content">
+      <header class="content-header">
+        <h1>{{media()?.name}}</h1>
+        
+        <div class="rating-section">
+          <span class="label">Sua Avaliação:</span>
+          @if (!editRating() && rating() != undefined) {
+            <div class="stars-display readonly" (click)="editRating.set(true)">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span class="star" [class.filled]="star <= (rating() ?? 0)">★</span>
+              }
+              <button class="btn-edit-inline">Editar</button>
+            </div>
+          } @else {
+            <div class="stars-display editable">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span class="star clickable" 
+                      [class.filled]="star <= (rating() ?? 0)" 
+                      (click)="setRating(star)">★</span>
+              }
+            </div>
+          }
         </div>
-        <button type="button" (click)="editRating.set(true)">
-            Editar
-        </button>
-        } @else {
-        <div class="stars editable">
-            @for (star of [1,2,3,4,5]; track star) {
-            <span class="star clickable" [class.filled]="star <= (rating() ?? 0)" (click)="setRating(star)">
-                ★
-            </span>
-            }
+      </header>
+
+      <section class="details-body">
+        <div class="info-group">
+          <h3><span class="icon">📝</span> Descrição</h3>
+          <p class="description-text">
+            {{ media()?.summary || 'Não há descrição disponível para este título.' }}
+          </p>
         </div>
-        }
-        </p>
+
+        <div class="info-group">
+          <h3><span class="icon">💬</span> Seu Comentário</h3>
+          @if (!editComments() && media()?.comments) {
+            <div class="comment-box" (click)="editComments.set(true)">
+              {{ comments() }}
+              <button class="btn-edit-inline">Editar</button>
+            </div>
+          } @else {
+            <textarea 
+              rows="4"
+              placeholder="O que você achou deste jogo?"
+              [value]="comments()" 
+              (input)="inputComments($event)">
+            </textarea>
+          }
+        </div>
+      </section>
     </div>
-    <div class="summary">
-        <p><b>Descrição:</b>
-            @if(media()?.summary){
-            {{(media()?.summary)}}
-            }@else {
-            Não há descrição
-            }
-        </p>
-    </div>
-    <div class="comments">
-        <p><b>Comentário:</b>
-            @if (!editComments() && media()?.comments) {
-            {{ comments() }}
-            <button type="button" (click)="editComments.set(true)">
-                Editar
-            </button>
-            } @else {
-            <textarea [value]="comments()" (input)="inputComments($event)">
-    </textarea>
-            }
-        </p>
-    </div>
-    <button type="submit" (click)="saveGameDiary()">
-        Salvar jogo
-    </button>
+
+  </div>
 </div>
