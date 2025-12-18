@@ -32,7 +32,6 @@ export class MediaPage {
 
   setRating(value: number) {
     this.rating.set(value);
-    console.log("Rating set to: ", value);
     this.editRating.set(false); // sai do modo edição
   }
 
@@ -49,7 +48,6 @@ export class MediaPage {
     this.game = <Game>this.mediaStore.selectedMedia();
     const commentsToSave = this.comments();
     const ratingToSave = this.rating();
-    console.log("Valor do game: ", this.game);
     if (this.game) {
       const email = <string>this.auth.getUserData()?.email;
       const savedMediaUser: SavedMediaUser = {
