@@ -17,15 +17,11 @@ export class TranslateService {
 
     if (response.status === 429) {
       console.warn("Limite de requisições atingido na API de tradução (Status 429).");
-      // Retorna imediatamente o texto original
       return text;
     }
 
     // Se não for 429, continua normalmente
     const data = await response.json();
-
-    // Imprime o JSON retornado para depuração, se quiser:
-    // console.log('JSON Retornado:', data);
 
     return data.responseData.translatedText;
   }

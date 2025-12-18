@@ -4,18 +4,21 @@ import { RegisterRequest } from '../models/register-request';
 import { Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { User } from '../models/user.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpContextToken, HttpParams } from '@angular/common/http';
 import { AuthResponse } from '../models/auth-response';
 import { UserMediaRequestUpdate } from '../models/user-media-request-update.model';
+import { environment } from '../../environments/environment';
 
+export const IS_PUBLIC_API = new HttpContextToken(() => false);
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
 
   user = signal<User | null>(null);
 
-  apiUrl = 'http://localhost:8080/';
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -23,12 +26,13 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       const res = await firstValueFrom(
-        this.http.post<AuthResponse>(this.apiUrl + 'login', { email, password })
-      );
+        this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, password }, {
+          // Aqui dizemos ao interceptor: "Ei, não mexa nesta requisição!"
+          context: new HttpContext().set(IS_PUBLIC_API, true)
+        }));
 
       localStorage.setItem('token', res.accessToken);
-      console.log('Token: ', res.accessToken);
-      console.log('Usuário logado: ', res.userResponseDTO);
+
       this.user.set(res.userResponseDTO);
       return true;
 
@@ -40,7 +44,7 @@ export class AuthService {
   async register(registerRequest: RegisterRequest) {
     try {
       await firstValueFrom(
-        this.http.post(this.apiUrl + 'user', registerRequest)
+        this.http.post(`${this.apiUrl}/user` + '', registerRequest)
       );
       return true;
     } catch (e) {
@@ -50,11 +54,10 @@ export class AuthService {
   }
 
   async updateUserMidia(userMediaRequestUpdate: UserMediaRequestUpdate): Promise<boolean> {
-    console.log('Game que vai ser salvo: ', userMediaRequestUpdate);
 
     try {
       const user = await firstValueFrom(
-        this.http.put<User>(this.apiUrl + 'user', userMediaRequestUpdate)
+        this.http.put<User>(`${this.apiUrl}/user`, userMediaRequestUpdate)
       );
       this.user.set(user);
       return true;
@@ -63,13 +66,12 @@ export class AuthService {
       return false;
     }
   }
-  
+
   async saveUserMidia(savedMediaUser: SavedMediaUser): Promise<boolean> {
-    console.log('Game que vai ser salvo: ', savedMediaUser);
 
     try {
       const user = await firstValueFrom(
-        this.http.post<User>(this.apiUrl + 'user/saveMediaOnUser', savedMediaUser)
+        this.http.post<User>(`${this.apiUrl}/user/saveMediaOnUser`, savedMediaUser)
       );
       this.user.set(user);
       return true;
@@ -93,13 +95,20 @@ export class AuthService {
   }
 
   searchGame(name: string) {
-    const params = new HttpParams().set('gameName', name).set('email', this.user()?.email || '');
-    return this.http.post<Game[]>(this.apiUrl + 'gamelist/games', params);
+    return this.http.post<Game[]>(
+      `${this.apiUrl}/gamelist/games`,
+      {},
+      {
+        params: new HttpParams()
+          .set('gameName', name)
+          .set('email', this.user()?.email ?? '')
+      }
+    );
   }
 
   async refreshGamesUserList(user: User) {
     try {
-      const refreshedUser = await firstValueFrom(this.http.post<User>(this.apiUrl + 'user/mediaFromUser', user.email));
+      const refreshedUser = await firstValueFrom(this.http.post<User>(`${this.apiUrl}/user/mediaFromUser`, user.email));
       this.user.set(refreshedUser);
       return true;
     } catch (e) {
