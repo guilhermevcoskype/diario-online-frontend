@@ -310,8 +310,8 @@ Contribuições são bem-vindas! Para contribuir:
 **Guilherme Viana**
 
 - GitHub: [@guilhermevcoskype](https://github.com/guilhermevcoskype)
-- LinkedIn: [Seu LinkedIn]
-- Email: [Seu Email]
+- LinkedIn: [[LinkedIn](https://www.linkedin.com/in/guilherme-vale-oliveira-dev/)]
+- Email: [[Seu Email](guilhermevcoskype@gmail.com)]
 
 ---
 
