@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
 import { HttpClient, HttpContext, HttpContextToken, HttpParams } from '@angular/common/http';
 import { AuthResponse } from '../models/auth-response';
 import { UserMediaRequestUpdate } from '../models/user-media-request-update.model';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 export const IS_PUBLIC_API = new HttpContextToken(() => false);
 @Injectable({
