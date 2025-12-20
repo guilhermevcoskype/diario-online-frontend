@@ -1,64 +1,82 @@
 # 🌐 Diário Online - Frontend
 
-Frontend da aplicação Diário Online, desenvolvido com Angular 20.
+Frontend da aplicação Diário Online, desenvolvido com Angular para gerenciamento de mídias (games, filmes e séries).
 
-## 🛠️ Tecnologias
+<div align="center">
 
-- **Angular 20**
-- **TypeScript 5.x**
+![TypeScript](https://img.shields.io/badge/TypeScript-50.2%25-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-30.4%25-CC6699?style=flat-square&logo=sass&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-19.4%25-E34F26?style=flat-square&logo=html5&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=flat-square&logo=angular&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)
+
+</div>
+
+---
+
+## 🎯 Sobre
+
+Interface moderna e responsiva para catalogar e gerenciar sua coleção pessoal de mídias digitais, incluindo funcionalidades de rede social para compartilhar suas experiências.
+
+---
+
+## 🛠️ Stack Tecnológica
+
+- **Angular 19** - Framework frontend
+- **TypeScript 5.x** - Linguagem principal
+- **SCSS** - Estilização avançada
 - **RxJS** - Programação reativa
-- **Angular Material** / **Bootstrap** - Componentes UI
-- **Nginx** - Servidor web (produção)
+- **Nginx** - Servidor web para produção
+- **Docker** - Containerização
 
 ---
 
 ## 📂 Estrutura do Projeto
 
 ```
-src/
-├── app/
-│   ├── core/                 # Serviços singleton, guards, interceptors
-│   │   ├── guards/           # Route guards (auth)
-│   │   ├── interceptors/     # HTTP interceptors (JWT, error)
-│   │   └── services/         # Serviços core (auth, API)
+diario-online-frontend/
+├── src/
+│   ├── app/                  # Aplicação Angular
+│   │   ├── components/       # Componentes da aplicação
+│   │   ├── services/         # Serviços e lógica de negócio
+│   │   ├── models/           # Interfaces e tipos TypeScript
+│   │   ├── guards/           # Guards de rota (autenticação)
+│   │   └── interceptors/     # HTTP interceptors
 │   │
-│   ├── shared/               # Componentes, pipes, directives compartilhados
-│   │   ├── components/       # Componentes reutilizáveis
-│   │   ├── models/           # Interfaces e modelos
-│   │   └── pipes/            # Pipes customizados
-│   │
-│   ├── features/             # Módulos de funcionalidades
-│   │   ├── auth/             # Login, registro
-│   │   ├── dashboard/        # Dashboard principal
-│   │   ├── medias/           # CRUD de mídias
-│   │   └── profile/          # Perfil do usuário
-│   │
-│   ├── app.component.ts
-│   ├── app.config.ts
-│   └── app.routes.ts
+│   ├── assets/               # Recursos estáticos
+│   ├── styles/               # Estilos globais SCSS
+│   └── environments/         # Configurações por ambiente
 │
-├── assets/                   # Imagens, ícones, fonts
-├── environments/             # Configurações de ambiente
-│   ├── environment.ts        # Desenvolvimento
-│   └── environment.prod.ts   # Produção
-│
-└── styles.css               # Estilos globais
+├── public/                   # Arquivos públicos
+├── .vscode/                  # Configurações do VS Code
+├── dockerfile                # Container Docker
+├── nginx.conf                # Configuração do Nginx
+├── angular.json              # Configuração do Angular CLI
+├── tsconfig.json             # Configuração TypeScript
+└── package.json              # Dependências do projeto
 ```
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Começando
 
 ### Pré-requisitos
-- Node.js 18+ e npm 9+
-- Angular CLI 20+
+
+- **Node.js** 18.x ou superior
+- **npm** 9.x ou superior
+- **Angular CLI** 19.x
+
+```bash
+# Instalar Angular CLI globalmente
+npm install -g @angular/cli@19
+```
 
 ### Instalação
 
-1. **Clone o repositório** (se ainda não fez)
+1. **Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/diario-online.git
-cd diario-online/diario-online-frontend
+git clone https://github.com/guilhermevcoskype/diario-online-frontend.git
+cd diario-online-frontend
 ```
 
 2. **Instale as dependências**
@@ -66,89 +84,56 @@ cd diario-online/diario-online-frontend
 npm install
 ```
 
-3. **Execute o projeto**
+3. **Configure o ambiente**
+
+Edite `src/environments/environment.ts` com a URL do backend:
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api'
+};
+```
+
+4. **Execute o projeto**
 ```bash
 ng serve
 ```
 
-Ou com configuração customizada:
-```bash
-ng serve --port 4200 --open
-```
-
-4. **Acesse no navegador**
-```
-http://localhost:4200
-```
+A aplicação estará disponível em `http://localhost:4200`
 
 ### Executar com Docker
 
 ```bash
+# Build da imagem
 docker build -t diario-online-frontend .
+
+# Executar container
 docker run -p 80:80 diario-online-frontend
 ```
 
----
-
-## ⚙️ Configuração
-
-### Ambientes (environments/)
-
-**environment.ts** (Desenvolvimento)
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api',
-  version: '1.0.0'
-};
-```
-
-**environment.prod.ts** (Produção)
-```typescript
-export const environment = {
-  production: true,
-  apiUrl: 'https://api.diarioonline.com/api',
-  version: '1.0.0'
-};
-```
+Acesse em `http://localhost`
 
 ---
 
-## 📦 Principais Dependências
+## 🏗️ Build
 
-```json
-{
-  "@angular/core": "^20.0.0",
-  "@angular/material": "^20.0.0",
-  "rxjs": "^7.8.0",
-  "chart.js": "^4.0.0",
-  "ngx-charts": "^20.0.0"
-}
+### Desenvolvimento
+```bash
+ng serve --open
 ```
 
----
+### Produção
+```bash
+ng build --configuration production
+```
 
-## 🧩 Módulos Principais
+Os arquivos otimizados estarão em `dist/`
 
-### Core Module
-Serviços singleton e configurações globais:
-- `AuthService` - Gerenciamento de autenticação
-- `HttpClient` - Comunicação com API
-- `AuthGuard` - Proteção de rotas
-- `JwtInterceptor` - Adiciona token JWT às requisições
-
-### Shared Module
-Componentes reutilizáveis:
-- `NavbarComponent`
-- `FooterComponent`
-- `LoadingSpinnerComponent`
-- `ConfirmDialogComponent`
-
-### Feature Modules
-- **AuthModule** - Login e registro
-- **DashboardModule** - Página inicial com estatísticas
-- **MediasModule** - Listagem, cadastro e edição de mídias
-- **ProfileModule** - Gerenciamento de perfil
+### Build com Análise
+```bash
+ng build --stats-json
+npx webpack-bundle-analyzer dist/diario-online-frontend/browser/stats.json
+```
 
 ---
 
@@ -164,116 +149,182 @@ ng test
 ng test --code-coverage
 ```
 
-Relatório em: `coverage/index.html`
+Relatório gerado em `coverage/index.html`
 
-### Testes E2E (se configurado)
+### Linting
 ```bash
-ng e2e
+ng lint
 ```
 
 ---
 
-## 🏗️ Build para Produção
-
-### Build Otimizado
-```bash
-ng build --configuration production
-```
-
-Arquivos gerados em: `dist/diario-online-frontend/`
-
-### Build com Análise de Bundle
-```bash
-ng build --stats-json
-npx webpack-bundle-analyzer dist/diario-online-frontend/stats.json
-```
-
----
-
-## 🎨 Padrões de Código
-
-### Componentes
-- Use `OnPush` change detection quando possível
-- Unsubscribe de observables no `ngOnDestroy`
-- Prefira `async` pipe para gerenciar subscriptions
-
-### Services
-- Um serviço por arquivo
-- Injeção de dependências via constructor
-- Use `BehaviorSubject` para estado compartilhado
-
-### Nomenclatura
-- Componentes: `media-list.component.ts`
-- Services: `media.service.ts`
-- Models: `media.model.ts`
-- Guards: `auth.guard.ts`
-
----
-
-## 📱 Responsividade
-
-A aplicação é totalmente responsiva:
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-
-Breakpoints configurados em `styles.css`:
-```css
-/* Mobile First */
-@media (min-width: 768px) { /* Tablet */ }
-@media (min-width: 1024px) { /* Desktop */ }
-```
-
----
-
-## 🔍 Troubleshooting
-
-### Erro: "Cannot find module @angular/..."
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Porta 4200 já em uso
-```bash
-ng serve --port 4300
-```
-
-### Build falha por falta de memória
-```bash
-node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build
-```
-
-### Erro de CORS
-Verifique se o backend está configurado para aceitar requisições de `http://localhost:4200`
-
----
-
-## 🎯 Scripts Disponíveis
+## 📦 Scripts Disponíveis
 
 ```json
 {
   "start": "ng serve",
   "build": "ng build",
+  "watch": "ng build --watch --configuration development",
   "test": "ng test",
-  "lint": "ng lint",
-  "format": "prettier --write \"src/**/*.{ts,html,css}\""
+  "lint": "ng lint"
 }
 ```
 
 ---
 
-## 📚 Recursos Úteis
+## 🎨 Funcionalidades Principais
 
-- [Angular Documentation](https://angular.dev)
-- [Angular Material](https://material.angular.io)
-- [RxJS Documentation](https://rxjs.dev)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- ✅ Autenticação de usuários (JWT)
+- 📝 CRUD completo de mídias
+- 🎮 Categorização por tipo (Games, Filmes, Séries)
+- ⭐ Sistema de avaliações
+- 🔍 Busca e filtros avançados
+- 👥 Funcionalidades de rede social
+- 📊 Dashboard com estatísticas
+- 📱 Interface totalmente responsiva
+- 🌙 Suporte a tema escuro/claro
 
 ---
 
-## 🔗 Links
+## 🔧 Configuração de Ambiente
 
-- [📘 README Principal](../README.md)
-- [🧠 Backend](../diario-online-backend/README.md)
-- [🐳 Docker Compose](../docker-compose.yml)
+### Development (environment.ts)
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+  version: '1.0.0'
+};
+```
+
+### Production (environment.prod.ts)
+```typescript
+export const environment = {
+  production: true,
+  apiUrl: 'https://api.diarioonline.com/api',
+  version: '1.0.0'
+};
+```
+
+---
+
+## 📱 Responsividade
+
+Breakpoints configurados:
+
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+---
+
+## 🐳 Docker
+
+### Dockerfile
+O projeto inclui um Dockerfile multi-stage otimizado:
+- Stage 1: Build da aplicação Angular
+- Stage 2: Servir com Nginx
+
+### nginx.conf
+Configuração customizada do Nginx para:
+- Servir arquivos estáticos
+- Roteamento SPA (Single Page Application)
+- Compressão gzip
+- Cache de assets
+
+---
+
+## 🔒 Segurança
+
+- Proteção contra XSS
+- Sanitização de inputs
+- Guards de autenticação em rotas protegidas
+- HTTP interceptors para gerenciar tokens JWT
+- Validação de formulários
+
+---
+
+## 🎯 Padrões de Código
+
+- **Componentes**: Estrutura modular e reutilizável
+- **Services**: Injeção de dependências
+- **Observables**: Gerenciamento com `async` pipe
+- **SCSS**: Metodologia BEM para nomenclatura de classes
+- **TypeScript**: Tipagem forte e interfaces bem definidas
+
+---
+
+## 🔍 Troubleshooting
+
+### Erro: "Cannot find module"
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Porta 4200 ocupada
+```bash
+ng serve --port 4300
+```
+
+### Erro de CORS
+Certifique-se que o backend está configurado para aceitar requisições de `http://localhost:4200`
+
+### Build falha por memória
+```bash
+node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build
+```
+
+---
+
+## 📚 Recursos e Documentação
+
+- [Angular Documentation](https://angular.dev)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [RxJS Documentation](https://rxjs.dev)
+- [SCSS Documentation](https://sass-lang.com/documentation)
+
+---
+
+## 🔗 Repositórios Relacionados
+
+- [📦 Repositório Infra (Docker Compose)](https://github.com/guilhermevcoskype/diario-online-infra)
+- [🧠 Backend (Spring Boot)](https://github.com/guilhermevcoskype/diario-online-backend)
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Fork o projeto
+2. Crie sua branch (`git checkout -b feature/NovaFuncionalidade`)
+3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
+5. Abra um Pull Request
+
+---
+
+## 👨‍💻 Autor
+
+**Guilherme Viana**
+
+- GitHub: [@guilhermevcoskype](https://github.com/guilhermevcoskype)
+- LinkedIn: [[LinkedIn](https://www.linkedin.com/in/guilherme-vale-oliveira-dev/)]
+- Email: [[Seu Email](guilhermevcoskype@gmail.com)]
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+<div align="center">
+
+⭐ **Se este projeto foi útil, considere dar uma estrela!** ⭐
+
+Desenvolvido com ❤️ usando Angular
+
+</div>
