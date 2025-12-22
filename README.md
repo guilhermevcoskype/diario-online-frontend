@@ -37,10 +37,10 @@ O objetivo deste frontend é oferecer uma experiência fluida para que o usuári
 | Funcionalidade | Status | Descrição |
 | :--- | :---: | :--- |
 | **Autenticação** | ✅ | Login e Cadastro de usuários funcional. |
-| **Pesquisa de Mídias** | 🟡 | Busca por nome integrada à API externa. |
-| **Detalhes da Mídia** | 🟡 | Visualização de info vinda da API. |
-| **Avaliação/Comentário** | ⏳ | Interface pronta, aguardando integração backend. |
-| **Dashboard** | 🚀 | Listagem de mídias salvas. |
+| **Pesquisa de Mídias** | ✅ | Busca por nome integrada à API externa. |
+| **Detalhes da Mídia** | ✅ | Visualização de info vinda da API. |
+| **Avaliação/Comentário** | ✅ | Interface pronta, aguardando integração backend. |
+| **Dashboard** | ✅ | Listagem de mídias salvas. |
 
 ---
 
