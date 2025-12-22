@@ -45,9 +45,15 @@ O objetivo deste frontend é oferecer uma experiência fluida para que o usuári
 ---
 
 ## 🖼️ Preview (WIP)
-> Adicione um print da sua tela aqui no futuro usando a sintaxe: `![nome](caminho-da-imagem.png)`
->
-> ![Screenshot Placeholder](https://via.placeholder.com/800x400?text=Aguardando+Screenshot+do+Projeto)
+
+<img width="1914" height="989" alt="image" src="https://github.com/user-attachments/assets/ee6405aa-f994-43c8-b940-e586bfef1b99" />
+<img width="1912" height="984" alt="image" src="https://github.com/user-attachments/assets/e4391b34-e533-4587-ae0e-3bace7483d5f" />
+<img width="1917" height="987" alt="image" src="https://github.com/user-attachments/assets/3c88494b-afab-4fe3-a73d-7cadea1a21c8" />
+<img width="1917" height="986" alt="image" src="https://github.com/user-attachments/assets/f6bc6152-d549-4f96-a523-436046b747bf" />
+
+
+
+
 
 ---
 
