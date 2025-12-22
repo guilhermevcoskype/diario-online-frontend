@@ -1,6 +1,6 @@
 # 🌐 Diário Online - Frontend
 
-Frontend da aplicação Diário Online, desenvolvido com Angular para gerenciamento de mídias (games, filmes e séries).
+Esta é a interface web do projeto Diário Online, uma plataforma para catalogação de mídias (jogos) com sistema de avaliações personalizadas.
 
 <div align="center">
 
@@ -14,20 +14,21 @@ Frontend da aplicação Diário Online, desenvolvido com Angular para gerenciame
 
 ---
 
-## 🎯 Sobre
+## 🏗️ O Projeto
+O objetivo deste frontend é oferecer uma experiência fluida para que o usuário gerencie sua biblioteca de jogos. A aplicação consome uma API externa de mídias e se comunica com um backend próprio para persistir notas e comentários dos usuários.
 
-Interface moderna e responsiva para catalogar e gerenciar sua coleção pessoal de mídias digitais, incluindo funcionalidades de rede social para compartilhar suas experiências.
+### 🔗 Repositórios Relacionados
+* 🔙 [Backend (API)](https://github.com/seu-usuario/diario-online-backend)
+* 🏗️ [Infraestrutura (Docker/Compose)](https://github.com/seu-usuario/diario-online-infra)
 
 ---
 
-## 🛠️ Stack Tecnológica
-
-- **Angular 19** - Framework frontend
-- **TypeScript 5.x** - Linguagem principal
-- **SCSS** - Estilização avançada
-- **RxJS** - Programação reativa
-- **Nginx** - Servidor web para produção
-- **Docker** - Containerização
+## 🛠️ Tecnologias e Decisões Técnicas
+* **Angular 19**: Uso de *Signals* para gerenciamento de estado reativo e *Standalone Components*.
+* **SCSS** - Estilização avançada
+* **Nginx**: Servidor web configurado para gerenciar o roteamento do SPA e servir arquivos estáticos.
+* **Docker**: Conteinerização para garantir que o ambiente de execução seja consistente.
+* **Integração de API**: Consumo reativo de dados de mídias externas.
 
 ---
 
@@ -57,151 +58,39 @@ diario-online-frontend/
 
 ---
 
-## 🚀 Começando
+## 📊 Status das Funcionalidades
 
-### Pré-requisitos
+| Funcionalidade | Status | Descrição |
+| :--- | :---: | :--- |
+| **Autenticação** | ✅ | Login e Cadastro de usuários funcional. |
+| **Pesquisa de Mídias** | 🟡 | Busca por nome integrada à API externa. |
+| **Detalhes da Mídia** | 🟡 | Visualização de info vinda da API. |
+| **Avaliação/Comentário** | ⏳ | Interface pronta, aguardando integração backend. |
+| **Dashboard** | 🚀 | Listagem de mídias salvas (Planejado). |
 
-- **Node.js** 18.x ou superior
-- **npm** 9.x ou superior
-- **Angular CLI** 19.x
+---
 
+## 🖼️ Preview (WIP)
+> Adicione um print da sua tela aqui no futuro usando a sintaxe: `![nome](caminho-da-imagem.png)`
+>
+> ![Screenshot Placeholder](https://via.placeholder.com/800x400?text=Aguardando+Screenshot+do+Projeto)
+
+---
+
+## 🚀 Como rodar localmente
+
+### 1. Com Docker (Recomendado)
 ```bash
-# Instalar Angular CLI globalmente
-npm install -g @angular/cli@19
-```
+# Clone o repositório
+git clone [https://github.com/guilhermevcoskype/diario-online-frontend.git](https://github.com/guilhermevcoskype/diario-online-frontend.git)
 
-### Instalação
-
-1. **Clone o repositório**
-```bash
-git clone https://github.com/guilhermevcoskype/diario-online-frontend.git
+# Acesse a pasta
 cd diario-online-frontend
-```
 
-2. **Instale as dependências**
-```bash
-npm install
-```
+# Build e execução via Docker
+docker build -t diario-frontend .
+docker run -p 80:80 diario-frontend
 
-3. **Configure o ambiente**
-
-Edite `src/environments/environment.ts` com a URL do backend:
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080'
-};
-```
-
-4. **Execute o projeto**
-```bash
-ng serve
-```
-
-A aplicação estará disponível em `http://localhost:4200`
-
-### Executar com Docker
-
-```bash
-# Build da imagem
-docker build -t diario-online-frontend .
-
-# Executar container
-docker run -p 80:80 diario-online-frontend
-```
-
-Acesse em `http://localhost`
-
----
-
-## 🏗️ Build
-
-### Desenvolvimento
-```bash
-ng serve --open
-```
-
-### Produção
-```bash
-ng build --configuration production
-```
-
-Os arquivos otimizados estarão em `dist/`
-
-### Build com Análise
-```bash
-ng build --stats-json
-npx webpack-bundle-analyzer dist/diario-online-frontend/browser/stats.json
-```
-
----
-
-## 🧪 Testes
-
-### Testes Unitários
-```bash
-ng test
-```
-
-### Testes com Cobertura
-```bash
-ng test --code-coverage
-```
-
-Relatório gerado em `coverage/index.html`
-
-### Linting
-```bash
-ng lint
-```
-
----
-
-## 📦 Scripts Disponíveis
-
-```json
-{
-  "start": "ng serve",
-  "build": "ng build",
-  "watch": "ng build --watch --configuration development",
-  "test": "ng test",
-  "lint": "ng lint"
-}
-```
-
----
-
-## 🎨 Funcionalidades Principais
-
-- ✅ Autenticação de usuários (JWT)
-- 📝 CRUD completo de mídias
-- 🎮 Categorização por tipo (Games, Filmes, Séries)
-- ⭐ Sistema de avaliações
-- 🔍 Busca e filtros avançados
-- 👥 Funcionalidades de rede social
-- 📊 Dashboard com estatísticas
-- 📱 Interface totalmente responsiva
-- 🌙 Suporte a tema escuro/claro
-
----
-
-## 🔧 Configuração de Ambiente
-
-### Development (environment.ts)
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080'
-};
-```
-
-### Production (environment.prod.ts)
-```typescript
-export const environment = {
-  production: true,
-  apiUrl: '/api'
-};
-```
 ---
 
 ## 🐳 Docker
@@ -237,52 +126,13 @@ Configuração customizada do Nginx para:
 
 ---
 
-## 🔍 Troubleshooting
-
-### Erro: "Cannot find module"
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Porta 4200 ocupada
-```bash
-ng serve --port 4300
-```
-
-### Erro de CORS
-Certifique-se que o backend está configurado para aceitar requisições de `http://localhost:4200`
-
-### Build falha por memória
-```bash
-node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build
-```
-
----
-
-## 📚 Recursos e Documentação
-
-- [Angular Documentation](https://angular.dev)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [RxJS Documentation](https://rxjs.dev)
-- [SCSS Documentation](https://sass-lang.com/documentation)
-
----
-
-## 🔗 Repositórios Relacionados
-
-- [📦 Repositório Infra (Docker Compose)](https://github.com/guilhermevcoskype/diario-online-infra)
-- [🧠 Backend (Spring Boot)](https://github.com/guilhermevcoskype/diario-online-backend)
-
----
-
 ## 👨‍💻 Autor
 
 **Guilherme Oliveira**
 
-- GitHub: [@guilhermevcoskype](https://github.com/guilhermevcoskype)
-- LinkedIn: [[LinkedIn](https://www.linkedin.com/in/guilherme-vale-oliveira-dev/)]
-- Email: [[Seu Email](guilhermevcoskype@gmail.com)]
+- GitHub: [guilhermevcoskype](https://github.com/guilhermevcoskype)
+- LinkedIn: [guilherme-vale-oliveira-dev](https://www.linkedin.com/in/guilherme-vale-oliveira-dev/)
+- Email: [guilhermevcoskype@gmail](guilhermevcoskype@gmail.com)
 
 ---
 
