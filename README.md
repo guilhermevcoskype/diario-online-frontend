@@ -41,9 +41,8 @@ diario-online-frontend/
 │   │   ├── services/         # Serviços e lógica de negócio
 │   │   ├── models/           # Interfaces e tipos TypeScript
 │   │   ├── guards/           # Guards de rota (autenticação)
-│   │   └── interceptors/     # HTTP interceptors
+│   │   └── interceptor/     # HTTP interceptors
 │   │
-│   ├── assets/               # Recursos estáticos
 │   ├── styles/               # Estilos globais SCSS
 │   └── environments/         # Configurações por ambiente
 │
@@ -203,17 +202,6 @@ export const environment = {
   apiUrl: '/api'
 };
 ```
-
----
-
-## 📱 Responsividade
-
-Breakpoints configurados:
-
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-
 ---
 
 ## 🐳 Docker
@@ -227,18 +215,15 @@ O projeto inclui um Dockerfile multi-stage otimizado:
 Configuração customizada do Nginx para:
 - Servir arquivos estáticos
 - Roteamento SPA (Single Page Application)
-- Compressão gzip
-- Cache de assets
 
 ---
 
 ## 🔒 Segurança
 
 - Proteção contra XSS
-- Sanitização de inputs
 - Guards de autenticação em rotas protegidas
-- HTTP interceptors para gerenciar tokens JWT
-- Validação de formulários
+- HTTP interceptor para gerenciar tokens JWT
+- Validação de formulário
 
 ---
 
@@ -291,18 +276,6 @@ node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build
 
 ---
 
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Fork o projeto
-2. Crie sua branch (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
-
----
-
 ## 👨‍💻 Autor
 
 **Guilherme Oliveira**
@@ -314,8 +287,6 @@ Contribuições são bem-vindas! Para contribuir:
 ---
 
 <div align="center">
-
-⭐ **Se este projeto foi útil, considere dar uma estrela!** ⭐
 
 Desenvolvido com ❤️ usando Angular
 
