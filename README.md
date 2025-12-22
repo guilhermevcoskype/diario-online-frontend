@@ -32,32 +32,6 @@ O objetivo deste frontend é oferecer uma experiência fluida para que o usuári
 
 ---
 
-## 📂 Estrutura do Projeto
-
-```
-diario-online-frontend/
-├── src/
-│   ├── app/                  # Aplicação Angular
-│   │   ├── components/       # Componentes da aplicação
-│   │   ├── services/         # Serviços e lógica de negócio
-│   │   ├── models/           # Interfaces e tipos TypeScript
-│   │   ├── guards/           # Guards de rota (autenticação)
-│   │   └── interceptor/     # HTTP interceptors
-│   │
-│   ├── styles/               # Estilos globais SCSS
-│   └── environments/         # Configurações por ambiente
-│
-├── public/                   # Arquivos públicos
-├── .vscode/                  # Configurações do VS Code
-├── dockerfile                # Container Docker
-├── nginx.conf                # Configuração do Nginx
-├── angular.json              # Configuração do Angular CLI
-├── tsconfig.json             # Configuração TypeScript
-└── package.json              # Dependências do projeto
-```
-
----
-
 ## 📊 Status das Funcionalidades
 
 | Funcionalidade | Status | Descrição |
@@ -90,6 +64,59 @@ cd diario-online-frontend
 # Build e execução via Docker
 docker build -t diario-frontend .
 docker run -p 80:80 diario-frontend
+```
+
+---
+
+### 2. Sem Docker
+
+- **Node.js** 18.x ou superior
+- **npm** 9.x ou superior
+- **Angular CLI** 19.x
+
+1. **Clone o repositório**
+```bash
+git clone https://github.com/guilhermevcoskype/diario-online-frontend.git
+cd diario-online-frontend
+```
+
+2. **Instale as dependências**
+```bash
+npm install
+```
+
+3. **Execute o projeto**
+```bash
+ng serve
+```
+
+A aplicação estará disponível em `http://localhost:4200`
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+diario-online-frontend/
+├── src/
+│   ├── app/                  # Aplicação Angular
+│   │   ├── components/       # Componentes da aplicação
+│   │   ├── services/         # Serviços e lógica de negócio
+│   │   ├── models/           # Interfaces e tipos TypeScript
+│   │   ├── guards/           # Guards de rota (autenticação)
+│   │   └── interceptor/     # HTTP interceptors
+│   │
+│   ├── styles/               # Estilos globais SCSS
+│   └── environments/         # Configurações por ambiente
+│
+├── public/                   # Arquivos públicos
+├── .vscode/                  # Configurações do VS Code
+├── dockerfile                # Container Docker
+├── nginx.conf                # Configuração do Nginx
+├── angular.json              # Configuração do Angular CLI
+├── tsconfig.json             # Configuração TypeScript
+└── package.json              # Dependências do projeto
+```
 
 ---
 
@@ -126,7 +153,7 @@ Configuração customizada do Nginx para:
 
 ---
 
-## 👨‍💻 Autor
+### 👨‍💻 Autor
 
 **Guilherme Oliveira**
 
