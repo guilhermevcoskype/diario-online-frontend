@@ -90,7 +90,7 @@ Edite `src/environments/environment.ts` com a URL do backend:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api'
+  apiUrl: 'http://localhost:8080'
 };
 ```
 
@@ -192,8 +192,7 @@ ng lint
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api',
-  version: '1.0.0'
+  apiUrl: 'http://localhost:8080'
 };
 ```
 
@@ -201,8 +200,7 @@ export const environment = {
 ```typescript
 export const environment = {
   production: true,
-  apiUrl: 'https://api.diarioonline.com/api',
-  version: '1.0.0'
+  apiUrl: '/api'
 };
 ```
 
@@ -307,17 +305,11 @@ Contribuições são bem-vindas! Para contribuir:
 
 ## 👨‍💻 Autor
 
-**Guilherme Viana**
+**Guilherme Oliveira**
 
 - GitHub: [@guilhermevcoskype](https://github.com/guilhermevcoskype)
 - LinkedIn: [[LinkedIn](https://www.linkedin.com/in/guilherme-vale-oliveira-dev/)]
 - Email: [[Seu Email](guilhermevcoskype@gmail.com)]
-
----
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
